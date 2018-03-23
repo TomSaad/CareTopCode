@@ -1,0 +1,44 @@
+#Title: 	code_outline.txt
+#Date:		March 23, 2018
+#Contributors	David St-Pierre stpied@rpi.edu
+
+
+Imports
+import time		#Used for delays
+import jeffery.sensors	#Class easing the use of the sensors
+import jeffery.jsonlog	#
+import RPi.GPIO
+import logging
+
+
+logging.basicConfig(filename='example.log',level=logging.DEBUG)
+logging.debug('This message should go to the log file')
+logging.info('So should this')
+logging.warning('And this, too')
+DEBUG = FALSE
+
+Functions to control
+	- Humidity
+	- Temperature
+	- Reading Sensors
+	- Writing to json website file
+	- Checking data to see if need to do function
+------
+SETUP
+------
+
+
+--------
+RUNNING (LOOP)
+--------
+
+f = open('config_ex.json', 'r')     #open the text file and make into string
+string = f.read()                   #in real life check to make sure that the file exists
+
+#Print json string for 
+if(DEBUG):
+	print(string)
+
+data = json.loads(string)           #load the string into json
+
+print(data["running"])              #use it like a dictionary (cause it is)
