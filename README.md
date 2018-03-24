@@ -2,7 +2,7 @@
 Date: March 24, 2018
 Version: 1.0
 
-#Description:
+# Description:
 IED SECTION 11 GROUP 3's project code
 
 CareTop is an autonomous terrarium monitoring solution that involves 
