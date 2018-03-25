@@ -6,10 +6,6 @@
 
 import RPi.GPIO as GPIO
 import time
-from espeak import espeak
-
-
-FUN = True
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
@@ -51,25 +47,16 @@ def all_on():
 	on(PIN_5)
 def say(words):
 	espeak.synth(words)
-
-if(FUN):
-	say("Hey there, get ready for some fun!")
 #-----------------
 #Pattern Thyme!!!!
 #-----------------
 
-if(FUN):
-	say("This is the blink, simple and humble, like a good beer")
 #Simple blink
 for x in range(0,5):
 	on(PIN_1)
 	time.sleep(0.2)
 	off(PIN_1)
 	time.sleep(0.2)
-
-if(FUN):
-	say("Lets all blink now, this is where the fun begins")
-	say("Aren't you having fun, woooooooo wo wo wo wooo")
 
 #LETS ALL BLINK!!!
 all_off()
@@ -85,9 +72,6 @@ all_on()
 time.sleep(0.3)
 all_off()
 time.sleep(0.3)
-
-if(FUN):
-	say("Now careful, this one is a bit trippy, introducing the row")
 
 #Go in a row!
 on(PIN_1)
@@ -118,9 +102,6 @@ on(PIN_1)
 
 all_off
 
-if(FUN):
-	say("Worms are not just for dirt, this is the worm")
-
 #I call this worm
 on(PIN_1)
 time.sleep(0.2)
@@ -143,8 +124,6 @@ time.sleep(0.2)
 off(PIN_1)
 time.sleep(0.2)
 
-if(FUN):
-	say("The inverter")
 #Inverting pairs
 for x in range(0,3):
 	on(PIN_1)
@@ -159,9 +138,6 @@ for x in range(0,3):
 	on(PIN_2)
 	on(PIN_4)
 	time.sleep(1)
-
-if(FUN):
-	say("The camelion is now confused by what you have done, make sure it actually gets food, thanks")
 
 
 #-----------------------------------
