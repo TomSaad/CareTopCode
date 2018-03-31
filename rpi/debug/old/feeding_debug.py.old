@@ -1,0 +1,123 @@
+#Title: 	code_outline.txt
+#Date:		March 23, 2018
+#		March 27, 2018
+#			- Modifying for Kaitlyn to have a manual test program
+
+#Contributors	David St-Pierre stpied@rpi.edu
+#
+#NOTES:
+#Functions to control
+#	- Humidity
+#	- Reading Sensors
+#	- Writing to json website file
+#	- Checking data to see if need to do function
+
+#-----------------
+# Imports
+#-----------------
+import time		#Used for delays
+import RPi.GPIO as GPIO
+
+###GPIO SETUP
+GPIO.setwarnings(False)
+
+#Use the BCM numbers not the direct pin numbers
+GPIO.setmode(GPIO.BCM)
+
+SERVO_SIGNAL_PIN = 18
+SERVO_1_PWR_PIN = 2
+SERVO_2_PWR_PIN = 3
+SERVO_3_PWR_PIN = 4
+SERVO_4_PWR_PIN = 17
+SERVO_5_PWR_PIN = 27
+HUMIDITY_PIN = 22
+
+GPIO.setup(SERVO_SIGNAL_PIN, GPIO.OUT)
+GPIO.setup(SERVO_1_PWR_PIN, GPIO.OUT, initial = 0)
+GPIO.setup(SERVO_2_PWR_PIN, GPIO.OUT, initial = 0)
+GPIO.setup(SERVO_3_PWR_PIN, GPIO.OUT, initial = 0)
+GPIO.setup(SERVO_4_PWR_PIN, GPIO.OUT, initial = 0)
+GPIO.setup(SERVO_5_PWR_PIN, GPIO.OUT, initial = 0)
+GPIO.setup(HUMIDITY_PIN, GPIO.OUT, initial = 0)
+
+servo = GPIO.PWM(SERVO_SIGNAL_PIN, 50)
+
+servo.start(7.5)
+time.sleep(2)
+
+#Servo pulse mapping: 2.5 - 12.5 (0 - 180)
+
+def all_off():
+	GPIO.output(SERVO_1_PWR_PIN, 0)
+	GPIO.output(SERVO_2_PWR_PIN, 0)
+	GPIO.output(SERVO_3_PWR_PIN, 0)
+	GPIO.output(SERVO_4_PWR_PIN, 0)
+	GPIO.output(SERVO_5_PWR_PIN, 0)
+
+def write_servo(pin, direction):
+	all_off()			# Turn all servos off (catch all)
+	servo.ChangeDutyCycle(direction)# Change the direction the servo pulses are giving
+	time.sleep(0.1)			# Give a small delay
+	GPIO.output(pin,1)		# Turn the servo on
+	time.sleep(1)			# Let the servo get to the position
+	GPIO.output(pin,0)		# Turn on the servo pin
+
+
+print("-------------------------------------------")
+print("		CARETOP FEEDING BEBUG		  ")
+print("-------------------------------------------")
+print("Controls:")
+print("[Number of feeding (1-10)][Open or closed (o or c)")
+print(" ")
+print("EXAMPLE")
+print("Open door 3")
+print(":3o")
+print("Close door 5")
+print(":5c")
+print("-------------------------------------------")
+print(" ")
+print(" ")
+print(" ")
+while(True):
+	print(raw_input(':'))
+	write_servo(SERVO_1_PWR_PIN, 5.3)
+	write_servo(SERVO_1_PWR_PIN, 2.5)
+	write_servo(SERVO_1_PWR_PIN, 12.5)
+	write_servo(SERVO_1_PWR_PIN, 6)
+	write_servo(SERVO_1_PWR_PIN, 10)
+
+	write_servo(SERVO_2_PWR_PIN, 5.3)
+	write_servo(SERVO_2_PWR_PIN, 2.5)
+	write_servo(SERVO_2_PWR_PIN, 12.5)
+	write_servo(SERVO_2_PWR_PIN, 6)
+	write_servo(SERVO_2_PWR_PIN, 10)
+
+	write_servo(SERVO_3_PWR_PIN, 5.3)
+	write_servo(SERVO_3_PWR_PIN, 2.5)
+	write_servo(SERVO_3_PWR_PIN, 12.5)
+	write_servo(SERVO_3_PWR_PIN, 6)
+	write_servo(SERVO_3_PWR_PIN, 10)
+
+	write_servo(SERVO_4_PWR_PIN, 5.3)
+	write_servo(SERVO_4_PWR_PIN, 2.5)
+	write_servo(SERVO_4_PWR_PIN, 12.5)
+	write_servo(SERVO_4_PWR_PIN, 6)
+	write_servo(SERVO_4_PWR_PIN, 10)
+
+	write_servo(SERVO_5_PWR_PIN, 5.3)
+	write_servo(SERVO_5_PWR_PIN, 2.5)
+	write_servo(SERVO_5_PWR_PIN, 12.5)
+	write_servo(SERVO_5_PWR_PIN, 6)
+	write_servo(SERVO_5_PWR_PIN, 10)
+	
+	GPIO.output(HUMIDITY_PIN, 0)
+	time.sleep(1)
+	GPIO.output(HUMIDITY_PIN, 1)
+	time.sleep(30)
+	GPIO.output(HUMIDITY_PIN, 0)
+	time.sleep(1)
+
+
+
+
+
