@@ -1,7 +1,10 @@
-#Title: 	code_outline.txt
+#Title: 	feeding_debug.py
 #Date:		March 23, 2018
 #		March 27, 2018
 #			- Modifying for Kaitlyn to have a manual test program
+#		April 1, 2018
+#			- Correcting for flux capacitor compatability
+#			- Troubleshooting door opening code
 
 #Contributors	David St-Pierre stpied@rpi.edu
 #
@@ -92,8 +95,9 @@ while(True):
 	elif(cmd[0] == "8" or cmd[0] == "9"):
 		servo_num  = SERVO_5_PWR_PIN
 	
+	print("Servo selected -> " + str(servo_num))
+
 	if(servo_num != 0):
-		print("Worked")
 		if(cmd[1] == "o" or cmd[1] == "O"):
 			if(int(cmd[0]) % 2 == 1):
 				servo.ChangeDutyCycle(3)# Change the direction the servo pulses are giving
