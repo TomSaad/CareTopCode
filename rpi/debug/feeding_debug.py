@@ -5,8 +5,13 @@
 #		April 1, 2018
 #			- Correcting for flux capacitor compatability
 #			- Troubleshooting door opening code
-
+#			- Added an option for h to control humitity
+#
 #Contributors	David St-Pierre stpied@rpi.edu
+#
+#DESCRIPTION
+#This progam allows a user to control the feeding servos directly using simple
+#commands explained when the program is run
 #
 #NOTES:
 #Functions to control
@@ -70,7 +75,7 @@ print("-------------------------------------------")
 print("		CARETOP FEEDING BEBUG		  ")
 print("-------------------------------------------")
 print("Controls:")
-print("[Number of feeding (1-10)][Open or closed (o or c)")
+print("[Number of feeding (0-9][Open or closed (o or c)")
 print(" ")
 print("EXAMPLE")
 print("Open door 3")
@@ -94,20 +99,20 @@ while(True):
 		servo_num  = SERVO_4_PWR_PIN
 	elif(cmd[0] == "8" or cmd[0] == "9"):
 		servo_num  = SERVO_5_PWR_PIN
-	
-	print("Servo selected -> " + str(servo_num))
+	elif(cmd[0] == "h" or cmd[0] == "H"):
+		servo_num  = -1
 
-	if(servo_num != 0):
+	if(servo_num > 0):
 		if(cmd[1] == "o" or cmd[1] == "O"):
 			if(int(cmd[0]) % 2 == 1):
-				servo.ChangeDutyCycle(3)# Change the direction the servo pulses are giving
-			else:
-				servo.ChangeDutyCycle(7.5)
-		elif(cmd[1] == "c" or cmd[1] == "C"):
-			if(int(cmd[0]) % 2 == 1):
-				servo.ChangeDutyCycle(7.5)# Change the direction the servo pulses are giving
+				servo.ChangeDutyCycle(3)  	# Determine if open is one way or the other
+				print("Servo " + str(servo_num) + " set to 3")
 			else:
 				servo.ChangeDutyCycle(12)
+				print("Servo " + str(servo_num) + " set to 12")
+		elif(cmd[1] == "c" or cmd[1] == "C"):
+			servo.ChangeDutyCycle(7.5)		#Close the door -> Same for both sides
+			print("Servo " + str(servo_num) + " set to 7.5")
 		else:
 			print("Error, I did not understand: " + cmd)
 
@@ -116,6 +121,13 @@ while(True):
 		time.sleep(1)
 		GPIO.output(servo_num, 0)
 		
+	elif(servo_num < 0):
+		if(cmd[1] == "o" or cmd[1] == "O"):
+			GPIO.output(HUMIDITY_PIN,1)		# Turn the humidity on
+			print("Turning humidity on")
+		elif(cmd[1] == "c" or cmd[1] == "C"):
+			GPIO.output(HUMIDITY_PIN,0)					
+			print("Turning humidity off")
 	else:
 		print("Error, I did not understand: " + cmd)
 
