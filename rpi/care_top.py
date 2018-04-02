@@ -13,6 +13,7 @@
 # Imports
 #-----------------
 import time		#Used for delays
+from datetime import datetime		#Used to get the date and time (for feeding)
 #import jeffery.sensors	#Class easing the use of the sensors
 #import jeffery.jsonlog	#
 import RPi.GPIO as GPIO
@@ -29,7 +30,7 @@ logging.basicConfig(filename='example.log',level=logging.DEBUG) #Change to INFO?
 # logging.warning('And this, too')
 
 #Variable to keep track of whether or not debugging is taking place
-DEBUG = FALSE
+DEBUG = True
 
 ###GPIO SETUP
 GPIO.setwarnings(False)
@@ -67,7 +68,7 @@ GPIO.setup(SERVO_5_PWR_PIN, GPIO.OUT)
 #humidity_hysteresis = true	
 
 while(True):
-
+	now = datetime.now()	
 	#------------------------
 	# Open and read JSON files
 	#------------------------
@@ -109,7 +110,12 @@ while(True):
 	#-----------------------
 	# Check for feeding time
 	#-----------------------
-
+	print(str(now.year()))
+	print(str(now.month()))
+	print(str(now.day()))
+	print(str(now.hour()))
+	print(str(now.minute()))
+	print(str(now.second()))
 	#-------------------------
 	# Check to change humidity
 	#-------------------------
