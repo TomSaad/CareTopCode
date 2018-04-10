@@ -68,43 +68,66 @@ GPIO.setup(SERVO_5_PWR_PIN, GPIO.OUT)
 
 #There is a desired value for the humidity, when the hysteresis is true, CareTop is trying to get to the desired
 #humidity, when hysteresis is false, careTop is letting the value drift until it passes outside of desired bounds
-#humidity_hysteresis = true	
+#humidity_hysteresis = true
 
 def main():
 	while(True):
-		now = datetime.datetime.now()	
-		
+		now = datetime.datetime.now()
+
 		#------------------------
 		# Open and read JSON files
 		#------------------------
-	
+
 		#Important to read JSON file everytime through loop incase a change has been made
-	
+
 		f = open('config_ex.json', 'r')     	#open the text file and make into string
 		string = f.read()                   	#in real life check to make sure that the file exists
-	
-		#Print json string for 
+
+		data = json.loads(string)
+
+		created = data["created"]
+		start = data["start"]
+		running = data["running"]
+		dTemp = data["dTemp"]
+		dHum = data["dHum"]
+		feeding1 = data["feeding1"].split("&")
+		feeding2 = data["feeding2"].split("&")
+		feeding3 = data["feeding3"].split("&")
+		feeding4 = data["feeding4"].split("&")
+		feeding5 = data["feeding5"].split("&")
+		feeding6 = data["feeding6"].split("&")
+		feeding7 = data["feeding7"].split("&")
+		feeding8 = data["feeding8"].split("&")
+		feeding9 = data["feeding9"].split("&")
+		feeding10 = data["feeding10"].split("&")
+
 		if(DEBUG):
-			print(string)
-		
-	#	data = json.loads(string)           	#load the string into json
-		
-		if(DEBUG):
-			print("[DEBUG]")
-	#		print(data["running"])          #use it like a dictionary (cause it is)
-	
-	
+			print(created)
+			print(start)
+			print(running)
+			print(dTemp)
+			print(dHum)
+			print(feeding1)
+			print(feeding2)
+			print(feeding3)
+			print(feeding4)
+			print(feeding5)
+			print(feeding6)
+			print(feeding7)
+			print(feeding8)
+			print(feeding9)
+			print(feeding10)
+
 		#Gets the desired humidity value from the website
-		desired_humidity = 0			
-		
+		desired_humidity = 0
+
 		#Gets the margins that are acceptable humidity from the website -> Hardcoded?
 		humidity_margin = 0
-	
+
 		#Calculates the max and min values for humidity -> for use in hysterisis
 		#Only need min_humidity because we have no way of removing humidity
 		min_humidity = desired_humidity - humidity_margin
-		
-		
+
 		#-------------
 		# Read sensors
 		#-------------

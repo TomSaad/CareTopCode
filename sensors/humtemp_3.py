@@ -3,8 +3,8 @@
 import sys
 import RPi.GPIO as GPIO
 #import Adafruit_Python_DHT/Adafruit_DHT
-import Adafruit_DHT
-#import sys.path.append('Adafruit_Python_DHT/Adafruit_DHT')
+#import Adafruit_DHT
+import sys.path.append('Adafruit_Python_DHT/Adafruit_DHT')
 
 ###GPIO SETUP
 GPIO.setwarnings(False)
@@ -14,21 +14,21 @@ GPIO.setmode(GPIO.BCM)
 
 # Assigned just going down left side
 # random pins and random comment
-HUMTMP_1_PIN = 4
-HUMTMP_2_PIN = 17
-HUMTMP_3_PIN = 27
-HUMTMP_4_PIN = 22
-HUMTMP_5_PIN = 5
-UVB_5_PIN = 6
+UVB_1_PIN = 4
+HUMTMP_1_PIN = 17
+HUMTMP_2_PIN = 27
+HUMTMP_3_PIN = 22
+HUMTMP_4_PIN = 5
+HUMTMP_5_PIN = 6
 
-GPIO.setup(UVB_5_PIN, GPIO.OUT)
+GPIO.setup(UVB_1_PIN, GPIO.OUT)
 GPIO.setup(HUMTMP_1_PIN, GPIO.OUT)
 GPIO.setup(HUMTMP_2_PIN, GPIO.OUT)
 GPIO.setup(HUMTMP_3_PIN, GPIO.OUT)
 GPIO.setup(HUMTMP_4_PIN, GPIO.OUT)
 GPIO.setup(HUMTMP_5_PIN, GPIO.OUT)
 
-uvsensors = [UVB_5_PIN]
+uvsensors = [UVB_1_PIN]
 uvb = [] * len(uvsensors)
 
 htsensors = [HUMTMP_1_PIN, HUMTMP_2_PIN, HUMTMP_3_PIN, HUMTMP_4_PIN, HUMTMP_5_PIN]
@@ -70,21 +70,10 @@ def readAll():
 
 def main():
     while True:
-        hum1, temp1 = read(HUMTMP_1_PIN)
-        hum2, temp2 = read(HUMTMP_2_PIN)
-        hum3, temp3 = read(HUMTMP_3_PIN)
-        hum4, temp4 = read(HUMTMP_4_PIN)
-        hum5, temp5 = read(HUMTMP_5_PIN)
-        print " h1: {0:0.1f} %  t1: {1:0.1f} C \t h2: {0:0.1f} %  t2: {1:0.1f} C \t h3: {0:0.1f} %  t3: {1:0.1f} C \t h4: {0:0.1f} %  t4: {1:0.1f} C \t h5: {0:0.1f} %  t5: {1:0.1f} C \n".format(
-                hum1, temp1
-                , hum2, temp2
-                , hum3, temp3
-                , hum4, temp4
-                , hum5, temp5
-                )
-
+        hum, temp = read(4)
+        #print "humidity: {0:0.1f} % \ttemperature: {1:0.1f} C".format(hum, temp)
         # python 2.7 syntax
-        #print("humidity: {0:0.5f} % \ttemperature: {1:0.1f} C", hum, temp)
+        print("humidity: {0:0.1f} % \ttemperature: {1:0.1f} C", hum, temp)
         # python 3.6 syntax
 
 if __name__ == "__main__":
