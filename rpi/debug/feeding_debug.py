@@ -53,6 +53,18 @@ servo = GPIO.PWM(SERVO_SIGNAL_PIN, 50)
 servo.start(7.5)
 time.sleep(2)
 
+
+GPIO.output(HUMIDITY_PIN,1)		# Turn the humidity on
+time.sleep(1)
+GPIO.output(HUMIDITY_PIN,0)		# Turn the humidity on
+time.sleep(1)
+GPIO.output(HUMIDITY_PIN,1)		# Turn the humidity on
+time.sleep(1)
+GPIO.output(HUMIDITY_PIN,0)		# Turn the humidity on
+time.sleep(1)
+
+
+
 #Servo pulse mapping: 2.5 - 12.5 (0 - 180)
 
 def all_off():

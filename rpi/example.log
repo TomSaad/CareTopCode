@@ -1,0 +1,72 @@
+DEBUG:root:This message should go to the log file
+INFO:root:So should this
+WARNING:root:And this, too
+DEBUG:root:This message should go to the log file
+INFO:root:So should this
+WARNING:root:And this, too
+DEBUG:root:This message should go to the log file
+INFO:root:So should this
+WARNING:root:And this, too
+DEBUG:root:This message should go to the log file
+INFO:root:So should this
+WARNING:root:And this, too
+DEBUG:root:This message should go to the log file
+INFO:root:So should this
+WARNING:root:And this, too
+DEBUG:root:This message should go to the log file
+INFO:root:So should this
+WARNING:root:And this, too
+DEBUG:root:This message should go to the log file
+INFO:root:So should this
+WARNING:root:And this, too
+DEBUG:root:This message should go to the log file
+INFO:root:So should this
+WARNING:root:And this, too
+DEBUG:root:This message should go to the log file
+INFO:root:So should this
+WARNING:root:And this, too
+INFO:root:----------------------------
+INFO:root:STARTUP: 2018-04-03 15:14:18.315890
+INFO:root:----------------------------
+DEBUG:root:Date = 4/3/2018
+DEBUG:root:Time = 15:14:18
+DEBUG:root:Date = 4/3/2018
+DEBUG:root:Time = 15:14:19
+DEBUG:root:Date = 4/3/2018
+DEBUG:root:Time = 15:14:20
+DEBUG:root:Date = 4/3/2018
+DEBUG:root:Time = 15:14:21
+INFO:root:----------------------------
+INFO:root:STARTUP: 2018-04-03 15:15:55.791876
+INFO:root:----------------------------
+DEBUG:root:Date = 4/3/2018
+DEBUG:root:Time = 15:15:55
+DEBUG:root:Date = 4/3/2018
+DEBUG:root:Time = 15:15:56
+INFO:root:----------------------------
+INFO:root:STARTUP: 2018-04-03 16:23:15.514044
+INFO:root:----------------------------
+DEBUG:root:Date = 4/3/2018
+DEBUG:root:Time = 16:23:15
+DEBUG:root:Date = 4/3/2018
+DEBUG:root:Time = 16:23:16
+DEBUG:root:Date = 4/3/2018
+DEBUG:root:Time = 16:23:17
+INFO:root:----------------------------
+INFO:root:STARTUP: 2018-04-03 16:26:39.478895
+INFO:root:----------------------------
+DEBUG:root:Date = 4/3/2018
+DEBUG:root:Time = 16:26:39
+DEBUG:root:Date = 4/3/2018
+DEBUG:root:Time = 16:26:40
+INFO:root:Program stopped normally by user
+INFO:root:----------------------------
+INFO:root:STARTUP: 2018-04-03 16:27:04.315125
+INFO:root:----------------------------
+DEBUG:root:Date = 4/3/2018
+DEBUG:root:Time = 16:27:4
+DEBUG:root:Date = 4/3/2018
+DEBUG:root:Time = 16:27:5
+DEBUG:root:Date = 4/3/2018
+DEBUG:root:Time = 16:27:6
+INFO:root:Program stopped normally by user
