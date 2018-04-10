@@ -11,6 +11,7 @@ GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 
 # Assigned just going down left side
+# random pins and random comment
 UVB_1_PIN = 4
 HUMTMP_1_PIN = 17
 HUMTMP_2_PIN = 27
