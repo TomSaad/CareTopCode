@@ -1,5 +1,5 @@
 #Title: 	care_top.py
-#Date:		March 27, 2018
+#Date:		April 13, 2018
 #Contributors	David St-Pierre stpied@rpi.edu
 #
 #NOTES:
@@ -24,10 +24,8 @@ import json
 # SETUP
 #------
 
-logging.basicConfig(filename='example.log',level=logging.DEBUG) #Change to INFO?  Change to date.log
+logging.basicConfig(filename='log.log',level=logging.INFO) #Change to INFO?  Change to date.log
 
-logging.info
-								#Log a message everytime a new event takes place
 logging.info('----------------------------')
 logging.info('STARTUP: ' + str(datetime.datetime.now()))
 logging.info('----------------------------')
@@ -131,11 +129,17 @@ def main():
 		#-------------
 		# Read sensors
 		#-------------
+		#DEBUG MODE -> Reading data from a sample data file
+		#Read the sensor values
+
+
 		actual_humidity = 8
 		#----------------------------------
 		# Upload new information to website
 		#----------------------------------
-	
+
+		#Call a simple function from sensor library to export data to formatted file
+
 		#-----------------------
 		# Check for feeding time
 		#-----------------------
@@ -155,10 +159,10 @@ def main():
 			print("Time = " + str(hour) + ":" + str(minute) + ":" + str(second))
 			date_str_1 = "Date = " + str(month) + "/" + str(day) + "/" + str(year)
 			date_str_2 = "Time = " + str(hour) + ":" + str(minute) + ":" + str(second)
-	
 			logging.debug(date_str_1)
 			logging.debug(date_str_2)
-			
+
+
 		#-------------------------
 		# Check to change humidity
 		#-------------------------
@@ -167,7 +171,6 @@ def main():
 
 		#Mush slo, no fasst
 		time.sleep(1)
-	
 
 		if(0):
 			logging.warning('If this message is being printed.....RUN.......RUN FAR')
