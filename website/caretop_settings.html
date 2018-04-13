@@ -1,0 +1,133 @@
+<!DOCTYPE HTML>
+<html>
+<!-- THIS IS THE SETTINGS PAGE FOR THE CARETOP -->
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="Assets/Style/style_main.css">
+    <script src="Assets/Code/scripts_main.js"></script>
+    <script src="Assets/Data/config.js"></script>
+
+    <script>
+        function fillCurrentConfig() {
+            document.getElementById("creation").innerHTML = config["created"];
+            document.getElementById("st").value = config["start"][3];
+            document.getElementById("temp").value = config["dTemp"];
+            document.getElementById("hum").value = config["dHum"];
+            
+            var name = "start";
+            var date = ("0000" + config[name][0]).substr(-4) + "-" + ("00" + config[name][1]).substr(-2) + "-" + ("00" + config[name][2]).substr(-2);
+            document.getElementById("sd").value = date;
+            
+            name = "feeding1";
+            if (config[name][0] != -1) {
+                date = ("0000" + config[name][0]).substr(-4) + "-" + ("00" + config[name][1]).substr(-2) + "-" + ("00" + config[name][2]).substr(-2);
+                document.getElementById(name).value = date;
+                document.getElementById(name+"_t").value = config[name][3];
+            }
+            name = "feeding2";
+            if (config[name][0] != -1) {
+                date = ("0000" + config[name][0]).substr(-4) + "-" + ("00" + config[name][1]).substr(-2) + "-" + ("00" + config[name][2]).substr(-2);
+                document.getElementById(name).value = date;
+                document.getElementById(name+"_t").value = config[name][3];
+            }
+            name = "feeding3";
+            if (config[name][0] != -1) {
+                date = ("0000" + config[name][0]).substr(-4) + "-" + ("00" + config[name][1]).substr(-2) + "-" + ("00" + config[name][2]).substr(-2);
+                document.getElementById(name).value = date;
+                document.getElementById(name+"_t").value = config[name][3];
+            }
+            name = "feeding4";
+            if (config[name][0] != -1) {
+                date = ("0000" + config[name][0]).substr(-4) + "-" + ("00" + config[name][1]).substr(-2) + "-" + ("00" + config[name][2]).substr(-2);
+                document.getElementById(name).value = date;
+                document.getElementById(name+"_t").value = config[name][3];
+            }
+            name = "feeding5";
+            if (config[name][0] != -1) {
+                date = ("0000" + config[name][0]).substr(-4) + "-" + ("00" + config[name][1]).substr(-2) + "-" + ("00" + config[name][2]).substr(-2);
+                document.getElementById(name).value = date;
+                document.getElementById(name+"_t").value = config[name][3];
+            }
+            name = "feeding6";
+            if (config[name][0] != -1) {
+                date = ("0000" + config[name][0]).substr(-4) + "-" + ("00" + config[name][1]).substr(-2) + "-" + ("00" + config[name][2]).substr(-2);
+                document.getElementById(name).value = date;
+                document.getElementById(name+"_t").value = config[name][3];
+            }
+            name = "feeding7";
+            if (config[name][0] != -1) {
+                date = ("0000" + config[name][0]).substr(-4) + "-" + ("00" + config[name][1]).substr(-2) + "-" + ("00" + config[name][2]).substr(-2);
+                document.getElementById(name).value = date;
+                document.getElementById(name+"_t").value = config[name][3];
+            }
+            name = "feeding8";
+            if (config[name][0] != -1) {
+                date = ("0000" + config[name][0]).substr(-4) + "-" + ("00" + config[name][1]).substr(-2) + "-" + ("00" + config[name][2]).substr(-2);
+                document.getElementById(name).value = date;
+                document.getElementById(name+"_t").value = config[name][3];
+            }
+            name = "feeding9";
+            if (config[name][0] != -1) {
+                date = ("0000" + config[name][0]).substr(-4) + "-" + ("00" + config[name][1]).substr(-2) + "-" + ("00" + config[name][2]).substr(-2);
+                document.getElementById(name).value = date;
+                document.getElementById(name+"_t").value = config[name][3];
+            }
+            name = "feeding10";
+            if (config[name][0] != -1) {
+                date = ("0000" + config[name][0]).substr(-4) + "-" + ("00" + config[name][1]).substr(-2) + "-" + ("00" + config[name][2]).substr(-2);
+                document.getElementById(name).value = date;
+                document.getElementById(name+"_t").value = config[name][3];
+            }
+        }
+        
+    </script>
+
+</head>
+<body style="background-color: #EAEFBD;" onload="fillCurrentConfig()">
+
+    <div id="Settings" class="tab">
+        Settings
+    </div>
+
+    <button class="tablink" onclick="gotoMain()">Monitor</button>
+    <button class="tablink" onclick="gotoQuick()">Setup</button>
+    <button class="tablink active">Settings</button>
+    <button class="tablink" onclick="gotoHistory()">History</button>
+    <button class="tablink" onclick="gotoAccount()">Account</button>
+
+    <div align="center">
+        <form action="Assets/Code/update_settings.php" method="post">
+            Desired Temperature: <input type="number" name="temp" required id="temp"><br>
+            Desired Humidity: <input type="number" name="hum" required id="hum"><br>
+            Start Date:<br>
+                Date: <input type="date" name="start_date" required id="sd"> Time (24-Hour): <input type="number" name="start_time" max="24" min="1" required id="st"><br>
+            Feeding One:<br>
+                Date: <input type="date" name="f1_date" id="feeding1"> Time (24-Hour): <input type="number" name="f1_time" max="24" min="1" id="feeding1_t"><br>
+            Feeding Two:<br>
+                Date: <input type="date" name="f2_date" id="feeding2"> Time (24-Hour): <input type="number" name="f2_time" max="24" min="1" id="feeding2_t"><br>
+            Feeding Three:<br>
+                Date: <input type="date" name="f3_date" id="feeding3"> Time (24-Hour): <input type="number" name="f3_time" max="24" min="1" id="feeding3_t"><br>
+            Feeding Four:<br>
+                Date: <input type="date" name="f4_date" id="feeding4"> Time (24-Hour): <input type="number" name="f4_time" max="24" min="1" id="feeding4_t"><br>
+            Feeding Five:<br>
+                Date: <input type="date" name="f5_date" id="feeding5"> Time (24-Hour): <input type="number" name="f5_time" max="24" min="1" id="feeding5_t"><br>
+            Feeding Six:<br>
+                Date: <input type="date" name="f6_date" id="feeding6"> Time (24-Hour): <input type="number" name="f6_time" max="24" min="1" id="feeding6_t"><br>
+            Feeding Seven:<br>
+                Date: <input type="date" name="f7_date" id="feeding7"> Time (24-Hour): <input type="number" name="f7_time" max="24" min="1" id="feeding7_t"><br>
+            Feeding Eight:<br>
+                Date: <input type="date" name="f8_date" id="feeding8"> Time (24-Hour): <input type="number" name="f8_time" max="24" min="1" id="feeding8_t"><br>
+            Feeding Nine:<br>
+                Date: <input type="date" name="f9_date" id="feeding9"> Time (24-Hour): <input type="number" name="f9_time" max="24" min="1" id="feeding9_t"><br>
+            Feeding Ten:<br>
+                Date: <input type="date" name="f0_date" id="feeding10"> Time (24-Hour): <input type="number" name="f0_time" max="24" min="1" id="feeding10_t"><br>
+            <input type="submit" value="Submit">
+        </form>
+        <p>
+            Your last config file was created on <span id="creation"></span>
+        </p>
+    </div>
+
+</body>
+</html>

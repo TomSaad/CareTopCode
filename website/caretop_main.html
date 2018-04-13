@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+<!-- THIS IS THE MAIN/MONITOR PAGE FOR THE CARETOP -->
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="Assets/Style/style_main.css">
+    <meta http-equiv="refresh" content="5">
+    <script src="Assets/Code/scripts_main.js"></script>
+    <script src="Assets/Data/data.js"></script>
+
+</head>
+<body style="background-color: #EAEFBD;" onLoad="Start()">
+
+    <div id="Main" class="tab">
+        Monitor
+    </div>
+
+    <button class="tablink active">Monitor</button>
+    <button class="tablink" onclick="gotoQuick()">Setup</button>
+    <button class="tablink" onclick="gotoSettings()">Settings</button>
+    <button class="tablink" onclick="gotoHistory()">History</button>
+    <button class="tablink" onclick="gotoAccount()">Account</button>
+
+    <div class="numDisplay">
+        <span id="temp_avg" style="font-size:4vw;">100</span>
+        <br>
+        <span id="temp_0">11</span>
+        <span id="temp_1">22</span>
+        <span id="temp_2">33</span>
+        <span id="temp_3">44</span>
+        <span id="temp_4">55</span>
+    </div>
+    
+    <div class="numDisplay">
+        <span id="hum_avg" style="font-size:4vw;">100</span>
+        <br>
+        <span id="hum_0">11</span>
+        <span id="hum_1">22</span>
+        <span id="hum_2">33</span>
+        <span id="hum_3">44</span>
+        <span id="hum_4">55</span>
+    </div>
+    
+    <div class="numDisplay" style="font-size:4vw;">
+        <span id="lit">100</span>
+    </div>
+    
+    <div>
+        <span>Last Updated: </span>
+    	<span id="created">DATE</span>
+    </div>
+
+</body>
+</html>

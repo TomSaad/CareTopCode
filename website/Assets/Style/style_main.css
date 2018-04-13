@@ -1,0 +1,61 @@
+/*
+#62BC59 - THE GREEN
+#EAEFBD - Tan?
+#C9E3AC - Green?
+#FFCC99 - Salmon?
+#A3A35C - Olive?
+*/
+
+/* Style the tab buttons */
+.tablink {
+    background-color: #555;
+    color: black;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 8px;
+    font-size: 1.5vw;
+    font-family: Tribeca Regular;
+    width: 20%;
+}
+
+/* Change background color of buttons on hover */
+.tablink:hover {
+    background-color: #ddf0db;
+}
+
+/* Set default styles for tab content */
+.tab {
+    background-color: #62BC59;
+    color: black;
+    font-family: Tribeca Regular;
+    padding: 1vw;
+    text-align: center;
+    font-size: 8vw;
+}
+
+.active {
+    background-color: #62BC59;
+}
+
+
+
+@font-face {
+    font-family: 'Tribeca Regular';
+    src: url('../Fonts/tribecaregular-webfont.woff2') format('woff2'),
+         url('../Fonts/tribecaregular-webfont.woff') format('woff'),
+		 url('../Fonts/tribecaregular-webfont.ttf') format('ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.numDisplay {
+    border: 1px solid black;
+    padding: 5px;
+    text-align: center;
+    font-size: 2vw;
+    min-width: 15vw;
+    min-height: 7vw;
+    float: left;
+}
