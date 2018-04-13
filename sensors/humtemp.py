@@ -75,17 +75,12 @@ def main():
         hum3, temp3 = read(HUMTMP_3_PIN)
         hum4, temp4 = read(HUMTMP_4_PIN)
         hum5, temp5 = read(HUMTMP_5_PIN)
-        print " h1: {0:0.1f} %  t1: {1:0.1f} C \t h2: {0:0.1f} %  t2: {1:0.1f} C \t h3: {0:0.1f} %  t3: {1:0.1f} C \t h4: {0:0.1f} %  t4: {1:0.1f} C \t h5: {0:0.1f} %  t5: {1:0.1f} C \n".format(
-                hum1, temp1
-                , hum2, temp2
-                , hum3, temp3
-                , hum4, temp4
-                , hum5, temp5
-                )
 
-        # python 2.7 syntax
-        #print("humidity: {0:0.5f} % \ttemperature: {1:0.1f} C", hum, temp)
-        # python 3.6 syntax
+	print("\nh1: {0:0.1f} %  t1: {1:0.1f} C \t h2: {2:0.1f} %  t2: {3:0.1f} C \t h3: {4:0.1f} %  t3: {5:0.1f} C \t h4: {6:0.1f} %  t4: {7:0.1f} C \t h5: {8:0.1f} %  t5: {9:0.1f} C").format(hum1, temp1, hum2, temp2, hum3, temp3, hum4, temp4, hum5, temp5)
+
+# python 2.7 syntax
+#print("humidity: {0:0.5f} % \ttemperature: {1:0.1f} C", hum, temp)
+# python 3.6 syntax
 
 if __name__ == "__main__":
-    main()
+	main()
