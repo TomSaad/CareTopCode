@@ -68,6 +68,20 @@ def readAll():
     for ht_sensor in range(1, len(htsensors)):
         humtemp[ht_sensor] = read(htsensors[ht_sensor])  # pass in pin of sensor
 
+def avgHum():
+    readAll()
+    avg = 0
+    for value in range(len(humtemp)):
+        avg = avg + humtemp[value][0] #just humidity here
+    return avg/len(humtemp)
+
+def avgTemp():
+    readAll()
+    avg = 0
+    for value in range(len(humtemp)):
+        avg = avg + humtemp[value][1] #just temperature here
+    return avg/len(humtemp)
+
 def main():
     while True:
         hum1, temp1 = read(HUMTMP_1_PIN)
