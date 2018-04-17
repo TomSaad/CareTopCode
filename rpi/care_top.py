@@ -53,12 +53,43 @@ GPIO.setup(SERVO_2_PWR_PIN, GPIO.OUT)
 GPIO.setup(SERVO_3_PWR_PIN, GPIO.OUT)
 GPIO.setup(SERVO_4_PWR_PIN, GPIO.OUT)
 GPIO.setup(SERVO_5_PWR_PIN, GPIO.OUT)
+GPIO.setup(SERVO_SIGNAL_PIN, GPIO.OUT)
 
 #
 # SPECIAL SET UP FOR SERVO TIMING PIN
 #
 
+servo = GPIO.PWM(SERVO_SIGNAL_PIN, 50)
 
+servo.start(7.5)
+time.sleep(2)
+
+#--------
+# Servo control functions
+#--------
+
+def all_off():
+	GPIO.output(SERVO_1_PWR_PIN, 0)
+	GPIO.output(SERVO_2_PWR_PIN, 0)
+	GPIO.output(SERVO_3_PWR_PIN, 0)
+	GPIO.output(SERVO_4_PWR_PIN, 0)
+	GPIO.output(SERVO_5_PWR_PIN, 0)
+
+def write_servo(pin, direction):
+	all_off()
+	servo.ChangeDutyCycle(direction)
+	time.sleep(0.1)
+	GPIO.output(pin, 1)
+	time.sleep(1)
+	GPIO.output(pin, 0)
+
+#---------------
+# WELCOME SCREEN FOR DEBUG
+#---------------
+if(DEBUG):
+	print("----------------------------------------------")
+	print("		    WELCOME TO CARETOP               ")
+	print("----------------------------------------------")
 
 #--------
 # RUNNING (LOOP)
@@ -131,7 +162,6 @@ def main():
 		#-------------
 		#DEBUG MODE -> Reading data from a sample data file
 		#Read the sensor values
-
 
 		actual_humidity = 8
 		#----------------------------------
