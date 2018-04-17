@@ -33,12 +33,12 @@ GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 
 SERVO_SIGNAL_PIN = 18
-SERVO_1_PWR_PIN = 2
-SERVO_2_PWR_PIN = 3
-SERVO_3_PWR_PIN = 4
-SERVO_4_PWR_PIN = 17
-SERVO_5_PWR_PIN = 27
-HUMIDITY_PIN = 22
+SERVO_1_PWR_PIN = 14
+SERVO_2_PWR_PIN = 15
+SERVO_3_PWR_PIN = 23
+SERVO_4_PWR_PIN = 24
+SERVO_5_PWR_PIN = 25
+HUMIDITY_PIN = 8
 
 GPIO.setup(SERVO_SIGNAL_PIN, GPIO.OUT)
 GPIO.setup(SERVO_1_PWR_PIN, GPIO.OUT, initial = 0)
@@ -132,13 +132,13 @@ while(True):
 		GPIO.output(servo_num, 1)
 		time.sleep(1)
 		GPIO.output(servo_num, 0)
-		
+
 	elif(servo_num < 0):
 		if(cmd[1] == "o" or cmd[1] == "O"):
 			GPIO.output(HUMIDITY_PIN,1)		# Turn the humidity on
 			print("Turning humidity on")
 		elif(cmd[1] == "c" or cmd[1] == "C"):
-			GPIO.output(HUMIDITY_PIN,0)					
+			GPIO.output(HUMIDITY_PIN,0)
 			print("Turning humidity off")
 	else:
 		print("Error, I did not understand: " + cmd)
