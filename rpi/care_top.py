@@ -39,13 +39,13 @@ GPIO.setwarnings(False)
 #Use the BCM numbers not the direct pin numbers
 GPIO.setmode(GPIO.BCM)
 
-HUMIDITY_PWR_PIN = 22
+HUMIDITY_PWR_PIN = 8
 SERVO_SIGNAL_PIN = 18
-SERVO_1_PWR_PIN = 2
-SERVO_2_PWR_PIN = 3
-SERVO_3_PWR_PIN = 4
-SERVO_4_PWR_PIN = 17
-SERVO_5_PWR_PIN = 27
+SERVO_1_PWR_PIN = 14
+SERVO_2_PWR_PIN = 15
+SERVO_3_PWR_PIN = 23
+SERVO_4_PWR_PIN = 24
+SERVO_5_PWR_PIN = 25
 
 GPIO.setup(HUMIDITY_PWR_PIN, GPIO.OUT)
 GPIO.setup(SERVO_1_PWR_PIN, GPIO.OUT)
@@ -53,12 +53,43 @@ GPIO.setup(SERVO_2_PWR_PIN, GPIO.OUT)
 GPIO.setup(SERVO_3_PWR_PIN, GPIO.OUT)
 GPIO.setup(SERVO_4_PWR_PIN, GPIO.OUT)
 GPIO.setup(SERVO_5_PWR_PIN, GPIO.OUT)
+GPIO.setup(SERVO_SIGNAL_PIN, GPIO.OUT)
 
 #
 # SPECIAL SET UP FOR SERVO TIMING PIN
 #
 
+servo = GPIO.PWM(SERVO_SIGNAL_PIN, 50)
 
+servo.start(7.5)
+time.sleep(2)
+
+#--------
+# Servo control functions
+#--------
+
+def all_off():
+	GPIO.output(SERVO_1_PWR_PIN, 0)
+	GPIO.output(SERVO_2_PWR_PIN, 0)
+	GPIO.output(SERVO_3_PWR_PIN, 0)
+	GPIO.output(SERVO_4_PWR_PIN, 0)
+	GPIO.output(SERVO_5_PWR_PIN, 0)
+
+def write_servo(pin, direction):
+	all_off()
+	servo.ChangeDutyCycle(direction)
+	time.sleep(0.1)
+	GPIO.output(pin, 1)
+	time.sleep(1)
+	GPIO.output(pin, 0)
+
+#---------------
+# WELCOME SCREEN FOR DEBUG
+#---------------
+if(DEBUG):
+	print("----------------------------------------------")
+	print("		    WELCOME TO CARETOP               ")
+	print("----------------------------------------------")
 
 #--------
 # RUNNING (LOOP)
@@ -131,7 +162,6 @@ def main():
 		#-------------
 		#DEBUG MODE -> Reading data from a sample data file
 		#Read the sensor values
-
 
 		actual_humidity = 8
 		#----------------------------------
