@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="Assets/Style/style_login.css">
+    <meta http-equiv="refresh" content="60">
+    <script src="Assets/Code/scripts_login.js"></script>
+    <style>
+        #help {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
+
+</head>
+<body style="background-color:#EAEFBD" class="login">
+
+    <div id="help">
+        <img src="Assets\Images\Help.png" alt="Help" onclick="on()" class="help">
+    </div>
+
+    <!-- This is the overlay -->
+    <div id="overlay">
+        <div id="help">
+            <img src="Assets\Images\X.png" alt="Help" onclick="off()" class="help">
+        </div>
+        <br> <br>
+        <div align="center">
+            <img src="Assets/Images/CareTopv2_Inverse.png" alt="Logo" style="max-width:60%;height:auto;"><br>
+
+            <from>
+                <label for="tankId" class="bw">Tank Id: </label>
+                    <input type="text" name="tankId" placeholder="Enter Tank Id" required class="overlay_in" maxlength="8"><br>
+                <label for="password" class="bw">Password: </label>
+                    <input type="password" name="password" placeholder="Enter Password" required class="overlay_in" maxlength="12"><br>
+                <label for="password2" class="bw">Confirm Password: </label>
+                    <input type="password" name="password2" placeholder="Enter Password" required class="overlay_in" maxlength="12"><br>
+                <p class="reg" onclick="register()">Register your tank</p>
+            </from>
+
+        </div>
+    </div>
+
+    <!-- THIS IS THE MAIN PAGE -->
+
+    <div align="center">
+        <br> <br>
+        <img src="Assets/Images/CareTopv2_2C.png" alt="Logo" style="max-width:60%;height:auto;">
+    </div>
+
+    <br>
+
+    <div align="center">
+        <form action="Assets/Code/login.php" method="post">
+                <label for="tankId" id="l1">Tank Id: </label>
+                    <input type="text" placeholder="Enter Tank Id" name="tankId" required class="main_in" maxlength="8"><br>
+                <label for="psw" id="l2">Password: </label>
+                    <input type="password" placeholder="Enter Password" name="psw" required class="main_in" maxlength="12"><br>
+                <input type="submit"class="login"></input>
+        </form>
+    </div>
+
+
+</body>
+</html>

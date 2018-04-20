@@ -1,0 +1,131 @@
+* {box-sizing: border-box}
+
+/* Tag styles */
+
+/* Set height of body and the document to 100% */
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial;
+}
+
+form {
+    align-items: center;
+    background-color: #EAEFBD;
+    padding: .5vw;
+    border: .5vw solid black;
+    width: 60vw;
+
+}
+
+/* Classes */
+body.login {
+    background-image: url("../Images/background-01.png");
+    background-repeat: repeat;
+}
+
+.help {
+    background-color: "#A3A35C";
+    float:right;
+    max-width:9%;
+}
+
+.main_in {
+    background-color:rgba(0,0,0,0);
+    border:none;
+    font-family:Tribeca Regular;
+    font-size:3vw;
+    width:32vw;
+}
+
+.overlay_in {
+    color:white;
+    background-color:rgba(0,0,0,0);
+    border:none;
+    font-family:Tribeca Regular;
+    font-size:3vw;
+    width:32vw;
+}
+
+label.bw {
+    color: white;
+    font-size:3vw;
+    font-family: Tribeca Regular;
+}
+
+input.login {
+    font-family:Tribeca Regular;
+    font-size:2vw;
+    border: .5vw solid black;
+}
+input.login:active {
+    background-color: #A3A35C;
+}
+input.reg {
+    font-family:Tribeca Regular;
+    font-size:2vw;
+    border: .5vw solid white;
+}
+input.reg:active {
+    background-color: white;
+}
+
+/* Ids */
+
+#help {
+    background-color: "#A3A35C";
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
+#help:hover {
+    cursor: pointer;
+}
+
+#l1 {
+    font-family:Tribeca Regular;
+    font-size:3vw;
+    padding-left: 3vw;
+}
+
+#l2 {
+    font-family:Tribeca Regular;
+    font-size:3vw;
+
+}
+
+#overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.90);
+    z-index: 2;
+
+    color: white;
+}
+
+
+/* Not sure what to call this */
+
+@font-face {
+    font-family: 'Tribeca Regular';
+    src: url('../Fonts/tribecaregular-webfont.woff2') format('woff2'),
+         url('../Fonts/tribecaregular-webfont.woff') format('woff'),
+		 url('../Fonts/tribecaregular-webfont.ttf') format('ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/*
+#62BC59 - THE GREEN
+#EAEFBD - Tan?
+#C9E3AC - Green?
+#FFCC99 - Salmon?
+#A3A35C - Olive?
+*/
