@@ -2,9 +2,9 @@
 
 import sys
 import RPi.GPIO as GPIO
-#import Adafruit_Python_DHT/Adafruit_DHT
 import Adafruit_DHT
-#import sys.path.append('Adafruit_Python_DHT/Adafruit_DHT')
+import smbus
+import time
 
 ###GPIO SETUP
 GPIO.setwarnings(False)
@@ -12,40 +12,47 @@ GPIO.setwarnings(False)
 #Use the BCM numbers not the direct pin numbers
 GPIO.setmode(GPIO.BCM)
 
-# Assigned just going down left side
-# random pins and random comment
+# Assigned pins going down left side of breakout
 HUMTMP_1_PIN = 4
 HUMTMP_2_PIN = 17
 HUMTMP_3_PIN = 27
 HUMTMP_4_PIN = 22
 HUMTMP_5_PIN = 5
-UVB_5_PIN = 6
 
-GPIO.setup(UVB_5_PIN, GPIO.OUT)
+#I2C setup
+bus = smbus.SMBus(1)
+UVB_I2C_ADDR = 0x10
+
+GPIO.setup(UVB_I2C_ADDR, GPIO.OUT)
 GPIO.setup(HUMTMP_1_PIN, GPIO.OUT)
 GPIO.setup(HUMTMP_2_PIN, GPIO.OUT)
 GPIO.setup(HUMTMP_3_PIN, GPIO.OUT)
 GPIO.setup(HUMTMP_4_PIN, GPIO.OUT)
 GPIO.setup(HUMTMP_5_PIN, GPIO.OUT)
 
-uvsensors = [UVB_5_PIN]
-uvb = [] * len(uvsensors)
-
-htsensors = [HUMTMP_1_PIN, HUMTMP_2_PIN, HUMTMP_3_PIN, HUMTMP_4_PIN, HUMTMP_5_PIN]
+htsensors = [
+		HUMTMP_1_PIN
+		, HUMTMP_2_PIN
+		, HUMTMP_3_PIN
+		, HUMTMP_4_PIN
+		, HUMTMP_5_PIN ]
 humtemp = [] * len(htsensors)
 
+uvsensors = [UVB_I2C_ADDR]
+uvb = [] * len(uvsensors)
 
 def read(pin):
+    return Adafruit_DHT.read_retry(11, pin)
     """
         takes in pin for sensor desired to read
         returns tuple of (humidity, temperature), using DHT library read function
+        read_retry from DHT library attempts to
+        read until valid tuple of (humidity, temperature) is returned.
+        if failed to do so in certain number of tries or time, returns (None, None).
+        read_retry arguments:
+        read_retry(sensor, pin, retries=15, delay_seconds=2, platform=None)
+        we use DHT11, so sensor is always 11
     """
-    # read_retry from DHT library attempts to read until valid tuple of (humidity, temperature) is returned.
-    # if failed to do so in certain number of tries or time, returns (None, None).
-    # read_retry arguments:
-    # read_retry(sensor, pin, retries=15, delay_seconds=2, platform=None)
-    # we use DHT11, so sensor is always 11
-    return Adafruit_DHT.read_retry(11, pin)
 
 def readHumidity(pin):
     """
@@ -61,12 +68,19 @@ def readTemperature(pin):
     """
     return Adafruit_DHT.read_retry(11, pin)[1]
 
-def readAll():
-    for uvb_sensor in range(1, len(uvsensors)):
-        uvb[uvb_sensor] = readUVB(uvsensors[uvb_sensor])  # pass in pin of sensor
+def readUVB(addr):
+	"""
+		takes pin for uvb sensor to read
+		uvb uses i2c protocol
+	"""
+	bus.read_byte_data(addr, 1)
 
-    for ht_sensor in range(1, len(htsensors)):
-        humtemp[ht_sensor] = read(htsensors[ht_sensor])  # pass in pin of sensor
+def readAll():
+    for hts in range(len(htsensors)):
+        humtemp[hts] = read(htsensors[hts])  # pass in pin of sensor
+
+    for uvbs in range(len(uvsensors)):
+        uvb[uvbs] = readUVB(uvsensors[uvbs])  # pass in pin of sensor
 
 def avgHum():
     readAll()
@@ -83,18 +97,37 @@ def avgTemp():
     return avg/len(humtemp)
 
 def main():
-    while True:
-        hum1, temp1 = read(HUMTMP_1_PIN)
-        hum2, temp2 = read(HUMTMP_2_PIN)
-        hum3, temp3 = read(HUMTMP_3_PIN)
-        hum4, temp4 = read(HUMTMP_4_PIN)
-        hum5, temp5 = read(HUMTMP_5_PIN)
+	while True:
+		hum1, temp1 = read(HUMTMP_1_PIN)
+		hum2, temp2 = read(HUMTMP_2_PIN)
+		hum3, temp3 = read(HUMTMP_3_PIN)
+		hum4, temp4 = read(HUMTMP_4_PIN)
+		hum5, temp5 = read(HUMTMP_5_PIN)
 
-	print("\nh1: {0:0.1f} %  t1: {1:0.1f} C \t h2: {2:0.1f} %  t2: {3:0.1f} C \t h3: {4:0.1f} %  t3: {5:0.1f} C \t h4: {6:0.1f} %  t4: {7:0.1f} C \t h5: {8:0.1f} %  t5: {9:0.1f} C").format(hum1, temp1, hum2, temp2, hum3, temp3, hum4, temp4, hum5, temp5)
+		print(""
+				+ "\n h1= {0:0.1f} %  t1= {1:0.1f} C"
+				+ "\t h2= {2:0.1f} %  t2= {3:0.1f} C"
+				+ "\t h3= {4:0.1f} %  t3= {5:0.1f} C"
+				+ "\t h4= {6:0.1f} %  t4= {7:0.1f} C"
+				+ "\t h5= {8:0.1f} %  t5= {9:0.1f} C"
+			+ "").format(
+				float(hum1), float(temp1)
+				, float(hum2), float(temp2)
+				, float(hum3), float(temp3)
+				, float(hum4), float(temp4)
+				, float(hum5), float(temp5)
+		     )
 
-# python 2.7 syntax
-#print("humidity: {0:0.5f} % \ttemperature: {1:0.1f} C", hum, temp)
-# python 3.6 syntax
+		avgh = avgHum()
+		avgt = avgTemp()
+		print(""
+				+ "\n avg hum: {0:0.1f}%  avg tmp: {1:0.1f} C"
+			+ "").format(avgh, avgt)
+
+		uvb = readUVB(UVB_I2C_ADDR)
+		print(""
+				+ "\n uvb: {0:0.1f} "
+		+ "").format(uvb)
 
 if __name__ == "__main__":
 	main()
