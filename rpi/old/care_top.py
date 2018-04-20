@@ -107,17 +107,10 @@ def main():
 		# Open and read JSON files
 		#------------------------
 
-		if(DEBUG):
-			print("----------------------------------------------")
-			print("		    CONFIGURATION FILE               ")
-			print("		    LOADED FROM WEBSITE              ")
-			print("----------------------------------------------")
+		#Important to read JSON file everytime through loop incase a change has been made
 
-		#Loading the configuration file
-
-		f = open('config.json', 'r')
-
-		string = f.read()
+		f = open('config.js', 'r')     	#open the text file and make into string
+		string = f.read()                   	#in real life check to make sure that the file exists
 
 		data = json.loads(string)
 
@@ -137,25 +130,22 @@ def main():
 		feeding9 = data["feeding9"].split("&")
 		feeding10 = data["feeding10"].split("&")
 
-
 		if(DEBUG):
-
-			print("Configuration file created: " + str(created))
-			print("Started:             " + str(start))
-			print("Running:             " + str(running))
-			print("Desired Temperature: " + str(dTemp))
-			print("Desired Humidity:    " + str(dHum))
-			print("Feeding 1:           " + str(feeding1))
-			print("Feeding 2:           " + str(feeding2))
-			print("Feeding 3:           " + str(feeding3))
-			print("Feeding 4:           " + str(feeding4))
-			print("Feeding 5:           " + str(feeding5))
-			print("Feeding 6:           " + str(feeding6))
-			print("Feeding 7:           " + str(feeding7))
-			print("Feeding 8:           " + str(feeding8))
-			print("Feeding 9:           " + str(feeding9))
-			print("Feeding 10:          " + str(feeding10))
-
+			print(created)
+			print(start)
+			print(running)
+			print(dTemp)
+			print(dHum)
+			print(feeding1)
+			print(feeding2)
+			print(feeding3)
+			print(feeding4)
+			print(feeding5)
+			print(feeding6)
+			print(feeding7)
+			print(feeding8)
+			print(feeding9)
+			print(feeding10)
 
 		#Gets the desired humidity value from the website
 		desired_humidity = 0

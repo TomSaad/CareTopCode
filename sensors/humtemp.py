@@ -30,17 +30,6 @@ GPIO.setup(HUMTMP_3_PIN, GPIO.OUT)
 GPIO.setup(HUMTMP_4_PIN, GPIO.OUT)
 GPIO.setup(HUMTMP_5_PIN, GPIO.OUT)
 
-htsensors = [
-		HUMTMP_1_PIN
-		, HUMTMP_2_PIN
-		, HUMTMP_3_PIN
-		, HUMTMP_4_PIN
-		, HUMTMP_5_PIN ]
-humtemp = [] * len(htsensors)
-
-uvsensors = [UVB_I2C_ADDR]
-uvb = [] * len(uvsensors)
-
 def read(pin):
     return Adafruit_DHT.read_retry(11, pin)
     """
@@ -73,23 +62,22 @@ def readUVB(addr):
 		takes pin for uvb sensor to read
 		uvb uses i2c protocol
 	"""
-        return bus.read_byte_data(addr, 1)
+        return bus.read_byte_data(addr, 0)
 
-def readAll():
+def readAll(htsensors, uvsensors):
     for hts in range(len(htsensors)):
         humtemp[hts] = read(htsensors[hts])  # pass in pin of sensor
-
     for uvbs in range(len(uvsensors)):
-        uvb[uvbs] = readUVB(uvsensors[uvbs])  # pass in pin of sensor
+        uvb[uvbs] = readUVB(uvsensors[uvbs])  # pass in i2c address of sensor
 
-def avgHum():
+def avgHum(htsensors, uvsensors):
     readAll()
     avg = 0
     for value in range(len(humtemp)):
         avg = avg + humtemp[value][0] #just humidity here
     return avg/len(humtemp)
 
-def avgTemp():
+def avgTemp(htsensors, uvsensors):
     readAll()
     avg = 0
     for value in range(len(humtemp)):
@@ -97,6 +85,17 @@ def avgTemp():
     return avg/len(humtemp)
 
 def main():
+	htsensors = [
+			HUMTMP_1_PIN
+			, HUMTMP_2_PIN
+			, HUMTMP_3_PIN
+			, HUMTMP_4_PIN
+			, HUMTMP_5_PIN ]
+	humtemp = [] * len(htsensors)
+
+	uvsensors = [UVB_I2C_ADDR]
+	uvb = [] * len(uvsensors)
+
 	while True:
 
 		uvb = readUVB(UVB_I2C_ADDR)
@@ -111,7 +110,7 @@ def main():
 		#hum5, temp5 = read(HUMTMP_5_PIN)
 		hum5 = readHumidity(HUMTMP_5_PIN)
 		temp5 = readTemperature(HUMTMP_5_PIN)
-
+		
 		print(""
 				+ "\n h1= {0:0.1f} %  t1= {1:0.1f} C"
 				+ "\t h2= {2:0.1f} %  t2= {3:0.1f} C"
@@ -125,9 +124,27 @@ def main():
 				, float(hum4), float(temp4)
 				, float(hum5), float(temp5)
 		     )
+		readAll(htsensors, uvsensors);
+		print("\n read all:"
+				+ "\n h1= {0:0.1f} %  t1= {1:0.1f} C"
+				+ "\t h2= {2:0.1f} %  t2= {3:0.1f} C"
+				+ "\t h3= {4:0.1f} %  t3= {5:0.1f} C"
+				+ "\t h4= {6:0.1f} %  t4= {7:0.1f} C"
+				+ "\t h5= {8:0.1f} %  t5= {9:0.1f} C"
+				+ "\t uvb= {10:0.1f}"
+			+ "").format(
+				float(htsensors[0][0]), float(htsensors[0][1])
+				, float(htsensors[0][0]), float(htsensors[0][1])
+				, float(htsensors[1][0]), float(htsensors[1][1])
+				, float(htsensors[2][0]), float(htsensors[2][1])
+				, float(htsensors[3][0]), float(htsensors[3][1])
+				, float(htsensors[4][0]), float(htsensors[4][1])
+				, float(uvsensors[0])
+		     )
 
-		avgh = avgHum()
-		avgt = avgTemp()
+
+		avgh = avgHum(htsensors, uvsensors)
+		avgt = avgTemp(htsensors, uvsensors)
 		print(""
 				+ "\n avg hum: {0:0.1f}%  avg tmp: {1:0.1f} C"
 			+ "").format(avgh, avgt)
