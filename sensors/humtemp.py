@@ -73,7 +73,7 @@ def readUVB(addr):
 		takes pin for uvb sensor to read
 		uvb uses i2c protocol
 	"""
-	bus.read_byte_data(addr, 1)
+        return bus.read_byte_data(addr, 1)
 
 def readAll():
     for hts in range(len(htsensors)):
@@ -98,11 +98,19 @@ def avgTemp():
 
 def main():
 	while True:
+
+		uvb = readUVB(UVB_I2C_ADDR)
+		print(""
+				+ "\n uvb: {0:0.1f} "
+		+ "").format(float(uvb))
+
 		hum1, temp1 = read(HUMTMP_1_PIN)
 		hum2, temp2 = read(HUMTMP_2_PIN)
 		hum3, temp3 = read(HUMTMP_3_PIN)
 		hum4, temp4 = read(HUMTMP_4_PIN)
-		hum5, temp5 = read(HUMTMP_5_PIN)
+		#hum5, temp5 = read(HUMTMP_5_PIN)
+		hum5 = readHumidity(HUMTMP_5_PIN)
+		temp5 = readTemperature(HUMTMP_5_PIN)
 
 		print(""
 				+ "\n h1= {0:0.1f} %  t1= {1:0.1f} C"
@@ -123,11 +131,6 @@ def main():
 		print(""
 				+ "\n avg hum: {0:0.1f}%  avg tmp: {1:0.1f} C"
 			+ "").format(avgh, avgt)
-
-		uvb = readUVB(UVB_I2C_ADDR)
-		print(""
-				+ "\n uvb: {0:0.1f} "
-		+ "").format(uvb)
 
 if __name__ == "__main__":
 	main()
