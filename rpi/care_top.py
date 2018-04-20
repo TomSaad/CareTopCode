@@ -1,5 +1,5 @@
 #Title: 	care_top.py
-#Date:		April 13, 2018
+#Date:		April 20, 2018
 #Contributors	David St-Pierre stpied@rpi.edu
 #
 #NOTES:
@@ -32,7 +32,7 @@ logging.info('----------------------------')
 
 #Variable to keep track of whether or not debugging is taking place
 DEBUG = True
-
+NO_SENSORS = True
 ###GPIO SETUP
 GPIO.setwarnings(False)
 
@@ -68,6 +68,12 @@ time.sleep(2)
 # Servo control functions
 #--------
 
+def hum_on():
+	GPIO.output(HUMIDITY_PWR_PIN, 1)
+
+def hum_off():
+	GPIO.output(HUMIDITY_PWR_PIN, 0)
+
 def all_off():
 	GPIO.output(SERVO_1_PWR_PIN, 0)
 	GPIO.output(SERVO_2_PWR_PIN, 0)
@@ -97,7 +103,8 @@ if(DEBUG):
 
 #There is a desired value for the humidity, when the hysteresis is true, CareTop is trying to get to the desired
 #humidity, when hysteresis is false, careTop is letting the value drift until it passes outside of desired bounds
-#humidity_hysteresis = true
+
+humidity_hysteresis = True
 
 def main():
 	while(True):
@@ -158,14 +165,15 @@ def main():
 
 
 		#Gets the desired humidity value from the website
-		desired_humidity = 0
+		desired_humidity = dHum
 
 		#Gets the margins that are acceptable humidity from the website -> Hardcoded?
-		humidity_margin = 0
+		humidity_margin = 5
 
 		#Calculates the max and min values for humidity -> for use in hysterisis
 		#Only need min_humidity because we have no way of removing humidity
 		min_humidity = desired_humidity - humidity_margin
+		max_humidity = desired_humidity + humidity_margin
 
 		#-------------
 		# Read sensors
@@ -173,7 +181,7 @@ def main():
 		#DEBUG MODE -> Reading data from a sample data file
 		#Read the sensor values
 
-		actual_humidity = 8
+		actual_humidity = 64
 		#----------------------------------
 		# Upload new information to website
 		#----------------------------------
@@ -202,11 +210,17 @@ def main():
 			logging.debug(date_str_1)
 			logging.debug(date_str_2)
 
-
 		#-------------------------
 		# Check to change humidity
 		#-------------------------
-
+		if(desired_humidity > max_humidity and humidity_hysteresis is true):
+			hum_off()
+			humidity_hysteresis = False
+			logging.debug("[" + data + "] Turning humidity on")
+		elif(desired_humidity < min_humidity and humidity_hysteresis is false):
+			hum_on()
+			humidity_hysteresis = True
+			logging.debug("[" + data + "] Turning humidity off")
 
 
 		#Mush slo, no fasst
