@@ -106,6 +106,8 @@ if(DEBUG):
 
 humidity_hysteresis = True
 
+no_sensors_line_cnt = 0
+
 def main():
 	while(True):
 		now = datetime.datetime.now()
@@ -146,7 +148,6 @@ def main():
 
 
 		if(DEBUG):
-
 			print("Configuration file created: " + str(created))
 			print("Started:             " + str(start))
 			print("Running:             " + str(running))
@@ -178,10 +179,26 @@ def main():
 		#-------------
 		# Read sensors
 		#-------------
-		#DEBUG MODE -> Reading data from a sample data file
-		#Read the sensor values
 
+		#Read the sensor values
 		actual_humidity = 64
+		actual_temperature = 44
+
+		#DEBUG MODE -> Reading data from a sample data file
+		if(NO_SENSORS):
+			file_name = "data.debug"
+			file = open(file_name)
+			lines = file.readlines()
+			data_line = lines[no_sensor_line_cnt]
+	        sensor_data = data_line.split(",")
+	        actual_humidity = sensor_data[0]
+	        actual_temperature = sensor_data[1]
+			no_sensor_line_cnt = no_sensor_line_cnt + 1
+        print("[DATA COLLECTED FROM SENSORS]")
+        print("[TEMPERATURE: " + actual_temperature)
+        print("[HUMIDITY: " + actual_humidity)
+    
+
 		#----------------------------------
 		# Upload new information to website
 		#----------------------------------
