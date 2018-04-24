@@ -404,3 +404,113 @@ INFO:root:[TEMPERATURE: 77
 
 INFO:root:[HUMIDITY: 72
 INFO:root:Program stopped normally by user
+INFO:root:----------------------------
+INFO:root:STARTUP: 2018-04-24 02:37:57.526851
+INFO:root:----------------------------
+INFO:root:New session
+INFO:root:------------------------------------------------
+INFO:root:Configuration file created: Thu Apr 5 23:59:02 2018
+INFO:root:Started:             0001&01&01&1
+INFO:root:Running:             True
+INFO:root:Desired Temperature: 85
+INFO:root:Desired Humidity:    60
+INFO:root:Feeding 1:           [u'0002', u'02', u'02', u'2']
+INFO:root:Feeding 2:           [u'0003', u'03', u'03', u'3']
+INFO:root:Feeding 3:           [u'0004', u'04', u'04', u'4']
+INFO:root:Feeding 4:           [u'0005', u'05', u'05', u'5']
+INFO:root:Feeding 5:           [u'0006', u'06', u'06', u'6']
+INFO:root:Feeding 6:           [u'0007', u'07', u'07', u'7']
+INFO:root:Feeding 7:           [u'1234', u'08', u'08', u'8']
+INFO:root:Feeding 8:           [u'0009', u'09', u'09', u'9']
+INFO:root:Feeding 9:           [u'0008', u'10', u'10', u'10']
+INFO:root:Feeding 10:          [u'0009', u'11', u'11', u'11']
+INFO:root:[DATA COLLECTED FROM SENSORS]
+INFO:root:[TEMPERATURE: 80
+
+INFO:root:[HUMIDITY: 50
+INFO:root:------------------------------------------------
+INFO:root:Configuration file created: Thu Apr 5 23:59:02 2018
+INFO:root:Started:             0001&01&01&1
+INFO:root:Running:             True
+INFO:root:Desired Temperature: 85
+INFO:root:Desired Humidity:    60
+INFO:root:Feeding 1:           [u'0002', u'02', u'02', u'2']
+INFO:root:Feeding 2:           [u'0003', u'03', u'03', u'3']
+INFO:root:Feeding 3:           [u'0004', u'04', u'04', u'4']
+INFO:root:Feeding 4:           [u'0005', u'05', u'05', u'5']
+INFO:root:Feeding 5:           [u'0006', u'06', u'06', u'6']
+INFO:root:Feeding 6:           [u'0007', u'07', u'07', u'7']
+INFO:root:Feeding 7:           [u'1234', u'08', u'08', u'8']
+INFO:root:Feeding 8:           [u'0009', u'09', u'09', u'9']
+INFO:root:Feeding 9:           [u'0008', u'10', u'10', u'10']
+INFO:root:Feeding 10:          [u'0009', u'11', u'11', u'11']
+INFO:root:[DATA COLLECTED FROM SENSORS]
+INFO:root:[TEMPERATURE: 80
+
+INFO:root:[HUMIDITY: 63
+INFO:root:------------------------------------------------
+INFO:root:Configuration file created: Thu Apr 5 23:59:02 2018
+INFO:root:Started:             0001&01&01&1
+INFO:root:Running:             True
+INFO:root:Desired Temperature: 85
+INFO:root:Desired Humidity:    60
+INFO:root:Feeding 1:           [u'0002', u'02', u'02', u'2']
+INFO:root:Feeding 2:           [u'0003', u'03', u'03', u'3']
+INFO:root:Feeding 3:           [u'0004', u'04', u'04', u'4']
+INFO:root:Feeding 4:           [u'0005', u'05', u'05', u'5']
+INFO:root:Feeding 5:           [u'0006', u'06', u'06', u'6']
+INFO:root:Feeding 6:           [u'0007', u'07', u'07', u'7']
+INFO:root:Feeding 7:           [u'1234', u'08', u'08', u'8']
+INFO:root:Feeding 8:           [u'0009', u'09', u'09', u'9']
+INFO:root:Feeding 9:           [u'0008', u'10', u'10', u'10']
+INFO:root:Feeding 10:          [u'0009', u'11', u'11', u'11']
+INFO:root:[DATA COLLECTED FROM SENSORS]
+INFO:root:[TEMPERATURE: 81
+
+INFO:root:[HUMIDITY: 65
+INFO:root:------------------------------------------------
+INFO:root:Configuration file created: Thu Apr 5 23:59:02 2018
+INFO:root:Started:             0001&01&01&1
+INFO:root:Running:             True
+INFO:root:Desired Temperature: 85
+INFO:root:Desired Humidity:    60
+INFO:root:Feeding 1:           [u'0002', u'02', u'02', u'2']
+INFO:root:Feeding 2:           [u'0003', u'03', u'03', u'3']
+INFO:root:Feeding 3:           [u'0004', u'04', u'04', u'4']
+INFO:root:Feeding 4:           [u'0005', u'05', u'05', u'5']
+INFO:root:Feeding 5:           [u'0006', u'06', u'06', u'6']
+INFO:root:Feeding 6:           [u'0007', u'07', u'07', u'7']
+INFO:root:Feeding 7:           [u'1234', u'08', u'08', u'8']
+INFO:root:Feeding 8:           [u'0009', u'09', u'09', u'9']
+INFO:root:Feeding 9:           [u'0008', u'10', u'10', u'10']
+INFO:root:Feeding 10:          [u'0009', u'11', u'11', u'11']
+INFO:root:[DATA COLLECTED FROM SENSORS]
+INFO:root:[TEMPERATURE: 83
+
+INFO:root:[HUMIDITY: 67
+INFO:root:Program stopped normally by user
+INFO:root:----------------------------
+INFO:root:STARTUP: 2018-04-24 02:38:39.124158
+INFO:root:----------------------------
+INFO:root:New session
+INFO:root:------------------------------------------------
+INFO:root:Configuration file created: Thu Apr 5 23:59:02 2018
+INFO:root:Started:             0001&01&01&1
+INFO:root:Running:             True
+INFO:root:Desired Temperature: 85
+INFO:root:Desired Humidity:    60
+INFO:root:Feeding 1:           [u'0002', u'02', u'02', u'2']
+INFO:root:Feeding 2:           [u'0003', u'03', u'03', u'3']
+INFO:root:Feeding 3:           [u'0004', u'04', u'04', u'4']
+INFO:root:Feeding 4:           [u'0005', u'05', u'05', u'5']
+INFO:root:Feeding 5:           [u'0006', u'06', u'06', u'6']
+INFO:root:Feeding 6:           [u'0007', u'07', u'07', u'7']
+INFO:root:Feeding 7:           [u'1234', u'08', u'08', u'8']
+INFO:root:Feeding 8:           [u'0009', u'09', u'09', u'9']
+INFO:root:Feeding 9:           [u'0008', u'10', u'10', u'10']
+INFO:root:Feeding 10:          [u'0009', u'11', u'11', u'11']
+INFO:root:[DATA COLLECTED FROM SENSORS]
+INFO:root:[TEMPERATURE: 80
+
+INFO:root:[HUMIDITY: 50
+INFO:root:Program stopped normally by user

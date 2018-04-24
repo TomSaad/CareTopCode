@@ -100,14 +100,30 @@ def main():
 	uvb = [] * len(uvsensors)
 
 	while True:
+		print(" ")
+		print("Reading Sensors")
 
 		hum0, temp0 = read(HUMTMP_0_PIN)
+		temp0 = (temp0 * 1.8) + 32
+		print("hum0  = " + str(hum0) + "     temp0 = " + str(temp0))
+
 		hum1, temp1 = read(HUMTMP_1_PIN)
+		temp1 = (temp1 * 1.8) + 32
+		print("hum1  = " + str(hum1) + "     temp1 = " + str(temp1))
+
 		hum2, temp2 = read(HUMTMP_2_PIN)
+		temp2 = (temp2 * 1.8) + 32
+		print("hum2  = " + str(hum2) + "     temp2 = " + str(temp2))
+
 		hum3, temp3 = read(HUMTMP_3_PIN)
-		#hum4, temp4 = read(HUMTMP_4_PIN)
-		hum4 = readHumidity(HUMTMP_4_PIN)
-		temp4 = readTemperature(HUMTMP_4_PIN)
+		temp3 = (temp3 * 1.8) + 32
+		print("hum3  = " + str(hum3) + "     temp3 = " + str(temp3))
+
+		hum4, temp4 = read(HUMTMP_4_PIN)
+		temp4 = (temp4 * 1.8) + 32
+		print("hum4  = " + str(hum4) + "     temp4 = " + str(temp4))
+
+		#hum4 = readHumidity(HUMTMP_4_PIN)
 
         if (hum0 > 100):
             humtemp[0] = (humtemp[0][0], temp0)
