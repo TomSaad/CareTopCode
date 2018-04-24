@@ -1,5 +1,5 @@
 #Title: 	care_top.py
-#Date:		April 13, 2018
+#Date:		April 23, 2018
 #Contributors	David St-Pierre stpied@rpi.edu
 #
 #NOTES:
@@ -32,7 +32,7 @@ logging.info('----------------------------')
 
 #Variable to keep track of whether or not debugging is taking place
 DEBUG = True
-
+NO_SENSORS = True
 ###GPIO SETUP
 GPIO.setwarnings(False)
 
@@ -68,6 +68,12 @@ time.sleep(2)
 # Servo control functions
 #--------
 
+def hum_on():
+	GPIO.output(HUMIDITY_PWR_PIN, 1)
+
+def hum_off():
+	GPIO.output(HUMIDITY_PWR_PIN, 0)
+
 def all_off():
 	GPIO.output(SERVO_1_PWR_PIN, 0)
 	GPIO.output(SERVO_2_PWR_PIN, 0)
@@ -97,20 +103,32 @@ if(DEBUG):
 
 #There is a desired value for the humidity, when the hysteresis is true, CareTop is trying to get to the desired
 #humidity, when hysteresis is false, careTop is letting the value drift until it passes outside of desired bounds
-#humidity_hysteresis = true
+
+humidity_hysteresis = True
+
 
 def main():
+	logging.info("New session")
+	no_sensor_line_cnt = 0
 	while(True):
+		logging.info("------------------------------------------------")
 		now = datetime.datetime.now()
 
 		#------------------------
 		# Open and read JSON files
 		#------------------------
 
-		#Important to read JSON file everytime through loop incase a change has been made
+		if(DEBUG):
+			print("----------------------------------------------")
+			print("		    CONFIGURATION FILE               ")
+			print("		    LOADED FROM WEBSITE              ")
+			print("----------------------------------------------")
 
-		f = open('config.js', 'r')     	#open the text file and make into string
-		string = f.read()                   	#in real life check to make sure that the file exists
+		#Loading the configuration file
+
+		f = open('config.json', 'r')
+
+		string = f.read()
 
 		data = json.loads(string)
 
@@ -130,40 +148,77 @@ def main():
 		feeding9 = data["feeding9"].split("&")
 		feeding10 = data["feeding10"].split("&")
 
+
 		if(DEBUG):
-			print(created)
-			print(start)
-			print(running)
-			print(dTemp)
-			print(dHum)
-			print(feeding1)
-			print(feeding2)
-			print(feeding3)
-			print(feeding4)
-			print(feeding5)
-			print(feeding6)
-			print(feeding7)
-			print(feeding8)
-			print(feeding9)
-			print(feeding10)
+			print("Configuration file created: " + str(created))
+			print("Started:             " + str(start))
+			print("Running:             " + str(running))
+			print("Desired Temperature: " + str(dTemp))
+			print("Desired Humidity:    " + str(dHum))
+			print("Feeding 1:           " + str(feeding1))
+			print("Feeding 2:           " + str(feeding2))
+			print("Feeding 3:           " + str(feeding3))
+			print("Feeding 4:           " + str(feeding4))
+			print("Feeding 5:           " + str(feeding5))
+			print("Feeding 6:           " + str(feeding6))
+			print("Feeding 7:           " + str(feeding7))
+			print("Feeding 8:           " + str(feeding8))
+			print("Feeding 9:           " + str(feeding9))
+			print("Feeding 10:          " + str(feeding10))
+			logging.info("Configuration file created: " + str(created))
+			logging.info("Started:             " + str(start))
+			logging.info("Running:             " + str(running))
+			logging.info("Desired Temperature: " + str(dTemp))
+			logging.info("Desired Humidity:    " + str(dHum))
+			logging.info("Feeding 1:           " + str(feeding1))
+			logging.info("Feeding 2:           " + str(feeding2))
+			logging.info("Feeding 3:           " + str(feeding3))
+			logging.info("Feeding 4:           " + str(feeding4))
+			logging.info("Feeding 5:           " + str(feeding5))
+			logging.info("Feeding 6:           " + str(feeding6))
+			logging.info("Feeding 7:           " + str(feeding7))
+			logging.info("Feeding 8:           " + str(feeding8))
+			logging.info("Feeding 9:           " + str(feeding9))
+			logging.info("Feeding 10:          " + str(feeding10))
+
 
 		#Gets the desired humidity value from the website
-		desired_humidity = 0
+		desired_humidity = dHum
 
 		#Gets the margins that are acceptable humidity from the website -> Hardcoded?
-		humidity_margin = 0
+		humidity_margin = 5
 
 		#Calculates the max and min values for humidity -> for use in hysterisis
 		#Only need min_humidity because we have no way of removing humidity
 		min_humidity = desired_humidity - humidity_margin
+		max_humidity = desired_humidity + humidity_margin
 
 		#-------------
 		# Read sensors
 		#-------------
-		#DEBUG MODE -> Reading data from a sample data file
-		#Read the sensor values
 
-		actual_humidity = 8
+		#Read the sensor values
+		actual_humidity = 64
+		actual_temperature = 44
+
+		#DEBUG MODE -> Reading data from a sample data file
+		if(NO_SENSORS):
+			file_name = "data.debug"
+			file = open(file_name)
+			lines = file.readlines()
+			data_line = lines[no_sensor_line_cnt]
+	        	sensor_data = data_line.split(",")
+		        actual_humidity = sensor_data[0]
+		        actual_temperature = sensor_data[1]
+			no_sensor_line_cnt = no_sensor_line_cnt + 1
+        	print("[DATA COLLECTED FROM SENSORS]")
+	        print("[TEMPERATURE: " + actual_temperature)
+	        print("[HUMIDITY: " + actual_humidity)
+
+        	logging.info("[DATA COLLECTED FROM SENSORS]")
+	        logging.info("[TEMPERATURE: " + actual_temperature)
+	        logging.info("[HUMIDITY: " + actual_humidity)
+
 		#----------------------------------
 		# Upload new information to website
 		#----------------------------------
@@ -192,18 +247,21 @@ def main():
 			logging.debug(date_str_1)
 			logging.debug(date_str_2)
 
-
 		#-------------------------
 		# Check to change humidity
 		#-------------------------
-
+		if(desired_humidity > max_humidity and humidity_hysteresis is true):
+			hum_off()
+			humidity_hysteresis = False
+			logging.debug("[" + data + "] Turning humidity on")
+		elif(desired_humidity < min_humidity and humidity_hysteresis is false):
+			hum_on()
+			humidity_hysteresis = True
+			logging.debug("[" + data + "] Turning humidity off")
 
 
 		#Mush slo, no fasst
 		time.sleep(1)
-
-		if(0):
-			logging.warning('If this message is being printed.....RUN.......RUN FAR')
 
 try:
 	main()
